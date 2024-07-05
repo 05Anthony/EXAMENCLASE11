@@ -1,0 +1,219 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    h1{
+        text-align: center;
+        font-size: 30px;
+        letter-spacing:5px ;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: bolder;
+    }
+
+    .box{
+        display: flex;
+    }
+
+    .box .imagen{
+        width: 50%;
+    }
+</style>
+<body>
+    <div class="encabezado">
+        <table>
+            <tr>
+                <td>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-ade51.appspot.com/o/logo.png?alt=media&token=6eca1002-e9e1-43a7-87fa-74c89fd591cc" width="400px">
+                </td>
+                <td>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-ade51.appspot.com/o/banner.jfif?alt=media&token=741817c3-8500-47ea-8d40-0c29d92b0378" width="1490px
+                    " alt="">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <style>
+    .box{
+        display: flex;
+    }
+    .formulario{
+        margin-top: 50px;
+    }
+
+    .formulario h3{
+        width: 500px;
+        text-align: center;
+        background-color: aqua;
+        border: 2px solid black;
+        border-radius: 15px
+    }
+
+    .formulario input{
+        width: 180px;
+        margin: 15px 0 15px 0;
+    }
+    .formulario select{
+        width: 150px;
+        margin: 15px 0 15px 0;
+    }
+
+    .imagen{
+        padding-left: 200px;
+        border-radius: 15px;
+    }
+
+    </style>
+
+    <h1>EL PLACER DE VIAJAR EN BUS</h1>
+
+    <div class="box">
+        <div class="imagen">
+            <img src="https://firebasestorage.googleapis.com/v0/b/restaurant-ade51.appspot.com/o/unidad.png?alt=media&token=75b243c9-6d41-4cb7-ab14-c673653d96cd"  width="800px" alt="">
+        </div>
+        <div class="formulario">
+            <h3>boleta de viaje</h3>
+            <table>
+                <tr>
+                    <td class="fecha">Fecha</td>
+                    <td><input type="date" id="fecha"></td>
+                    <td class="ruc">RUC</td>
+                    <td>75521546562165</td>
+                </tr>
+                <tr>
+                    <td class="dni">DNI</td>
+                    <td><input type="text" id="DNI"></td>
+                    <td class="pasajero">PASAJERO</td>
+                    <td><input type="text" id="pasajero"></td>
+                </tr>
+                <tr>
+                    <td class="ruta">RUTA</td>
+                    <td><select name="" id="ruta">
+                        <option value="1" id="lima-mala">lima-Mala</option>
+                        <option value="2" id="lima-cañete">Lima-Cañete</option>
+                        <option value="3" id="lima-chincha">Lima-Chincha</option>
+                        <option value="4" id="lima-pisco">Lima-Pisco</option>
+                    </select></td>
+                    <td class="precio">PRECIO</td>
+                    <td><input type="text" id="precio"></td>
+                </tr>
+                <tr>
+                    <td class="cantidad">CANTIDAD</td>
+                    <td><input type="text" id="cantidad"></td>
+                </tr>
+                <tr>
+                    <td class="servicio">SERVICIO</td>
+                    <td><select name="" id="servicio">
+                        <option value="1" id="economico">economico</option>
+                        <option value="2" id="ejecutivo">ejecutivo</option>
+                        <option value="2" id="presidencial">presidencial</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td class="medio-de-pago">MEDIO DE PAGO</td>
+                    <td><select name="" id="mediopago">
+                        <option value="1" id="efectivo">efectivo</option>
+                        <option value="2" id="visa">visa</option>
+                        <option value="3" id="debito">debito</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td class="total-soles">total S/</td>
+                    <td><input type="text" id="xsoles"></td>
+                    <td class="total-dolares">total US</td>
+                    <td><input type="text" id="xdolares"></td>
+                </tr>
+                <tr>
+                    <td><button class="calcular" onclick="calcular();">calcular</button></td>
+                    <td><button class="limpiar" onclick="limpiar();">limpiar</button></td>
+                    <td><button class="imprimir" onclick="imprimir();">imprimir</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+    function calcular() {
+            // Obtener valores seleccionados
+            var ruta = document.getElementById('ruta').value;
+            var cantidad = parseInt(document.getElementById('cantidad').value);
+            var servicio = document.getElementById('servicio').value;
+
+            // Definir precios base según la ruta seleccionada
+            var precioBase = 0;
+            switch (ruta) {
+                case '1':
+                    precioBase = 20.00;
+                    break;
+                case '2':
+                    precioBase = 25.00;
+                    break;
+                case '3':
+                    precioBase = 30.00;
+                    break;
+                case '4':
+                    precioBase = 40.00;
+                    break;
+                default:
+                    precioBase = 0;
+            }
+
+            // Multiplicar el precio base por la cantidad de pasajeros
+            var precioFinal = precioBase * cantidad;
+
+            // Aplicar ajuste de servicio (10% o 15%)
+            if (servicio === '2') { // ejecutivo
+                precioFinal *= 1.1; // aumento del 10%
+            } else if (servicio === '3') { // presidencial
+                precioFinal *= 1.15; // aumento del 15%
+            }
+
+            // Aplicar descuento del 10% si la cantidad de pasajeros es exactamente 3
+            if (cantidad === 3) {
+                precioFinal *= 0.9; // descuento del 10%
+            }
+
+            // Calcular total en soles y dólares (tipo de cambio: 3.5)
+            var totalSoles = precioFinal.toFixed(2);
+            var totalDolares = (precioFinal / 3.5).toFixed(2);
+
+            // Mostrar los resultados en los campos correspondientes
+            document.getElementById('precio').value = precioFinal.toFixed(2);
+            document.getElementById('xsoles').value = totalSoles;
+            document.getElementById('xdolares').value = totalDolares;
+        }
+
+        function limpiar() {
+            // Limpiar todos los campos del formulario
+            document.getElementById('fecha').value = '';
+            document.getElementById('DNI').value = '';
+            document.getElementById('pasajero').value = '';
+            document.getElementById('precio').value = '';
+            document.getElementById('cantidad').value = '';
+            document.getElementById('xsoles').value = '';
+            document.getElementById('xdolares').value = '';
+            document.getElementById('ruta').value = '1'; // Resetear la ruta seleccionada
+            document.getElementById('servicio').value = '1'; // Resetear el servicio seleccionado
+            document.getElementById('mediopago').value = '1'; // Resetear el medio de pago seleccionado
+        }
+
+        function imprimir() {
+            // Función de ejemplo para imprimir la boleta
+            window.print();
+        }
+    </script>
+    
+</body>
+</html>
